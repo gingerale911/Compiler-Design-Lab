@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+int main(){
+	FILE *fa, *fb;
+	int ca, cb, nl=1;
+	printf("L1\n");
+	fa=fopen("i.c","r");
+	if(fa==NULL){
+		printf("Cant Open File 1\n");
+		exit(0);
+	}
+	
+	fb=fopen("o.c","w");
+	if(fb==NULL){
+		printf("Cant Open File 2\n");
+	}
+	printf("L2\n");
+
+	ca=getc(fa);
+    while(ca!=EOF){
+        if(ca=='#'&&nl){
+            while(ca!='\n'&&ca!=EOF)
+                ca=getc(fa);
+            if(ca==EOF){
+                fclose(fa);
+                fclose(fb);
+                printf("L3(Code Successfull Siuuuuuuu)\n");
+                exit(0);
+            }
+            putc(ca, fb);
+        }
+        else
+            putc(ca,fb);
+        ca=getc(fa);
+    }
+    fclose(fa);
+    fclose(fb);
+    printf("L3(Code Successfull Siuuuuuuu)\n");
+    return 0;
+}
